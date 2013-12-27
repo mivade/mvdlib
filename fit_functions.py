@@ -7,6 +7,8 @@ used with scipy.optimize.curve_fit.
 
 import numpy as np
 
+## Fit functions ##
+
 def gaussian(t, A, B, t0, sigma):
     return A*np.exp(-(t - t0)**2/(2*sigma**2)) + B
 
@@ -16,6 +18,14 @@ def lorentzian(x, A, B, x0, gamma):
 def sechsq(t, A, B, t0, tau):
     """sech^2 profile."""
     return A/np.cosh((t - t0)/tau)**2 + B
+
+def sine(t, A, B, w, phi):
+    return A*np.sine(w*t + phi) + B
+
+def exp_decay(t, A, B, tau, t0):
+    return A*np.exp(-(t - t0)/tau) + B
+
+## Utility functions ##
 
 def get_fwhm(p, ftype='gaussian'):
     """Find the FWHM of a given fit."""
