@@ -3,7 +3,10 @@ mvdlib
 ======
 
 A collection of useful (or at least frequently used) stuff for reading
-and analyzing data by MVD.
+and analyzing data by MVD. This software may be freely distributed
+under the terms of the `GNU GPL version 3`__. 
+
+__ https://www.gnu.org/licenses/gpl.html
 
 Package Contents
 ================
