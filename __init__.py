@@ -1,4 +1,5 @@
-__all__ = ["oceanoptics", "OOSpectrum",
-           "fit_functions", "misc"]
+"""
+mvdlib
+"""
 
-from . oceanoptics import OOSpectrum
+__all__ = ["oceanoptics", "fit_functions", "misc", "transitions"]
