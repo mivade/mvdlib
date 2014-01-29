@@ -34,3 +34,11 @@ optics
 
 A submodule with optics-related formulae and other fun stuff. Or at
 least it could contain such things in the future.
+
+transitions
+-----------
+
+Conversion between spectroscopic units such as wavenumbers in inverse
+cm to frequency in Hz. It might make sense to rename this module to
+something like "spectroscopy" later on and incorporate additional
+things besides these utility functions.
