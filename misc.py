@@ -1,8 +1,7 @@
 """
-misc.py
+mvdlib.misc
 
 Miscellaneous utility functions that don't fit anywhere else.
-
 """
 
 import numpy as np

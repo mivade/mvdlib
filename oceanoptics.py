@@ -1,7 +1,7 @@
-"""oceanoptics.py
+"""
+mvdlib.oceanoptics
 
 Read spectra datafiles from Ocean Optics spectromters.
-
 """
 
 from __future__ import print_function
