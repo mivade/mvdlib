@@ -20,7 +20,7 @@ def sechsq(t, A, B, t0, tau):
     return A/np.cosh((t - t0)/tau)**2 + B
 
 def sine(t, A, B, w, phi):
-    return A*np.sine(w*t + phi) + B
+    return A*np.sin(w*t + phi) + B
 
 def exp_decay(t, A, B, tau, t0):
     return A*np.exp(-(t - t0)/tau) + B
