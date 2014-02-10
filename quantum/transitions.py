@@ -1,5 +1,5 @@
 """
-mvdlib.transitions
+mvdlib.quantum.transitions
 
 Miscellaneous stuff dealing with atomic transitions (e.g., converting
 between inverse cm and frequency. Yeah, this mostly just involves
