@@ -44,10 +44,10 @@ class Glass(object):
         https://en.wikipedia.org/wiki/Sellmeier_equation
 
         """
-        lmbda *= _m_to_micron
+        wl = lmbda * _m_to_micron
         n_sq = 1.
         for i in range(3):
-            n_sq += self.B[i]*lmbda**2/(lmbda**2 - self.C[i])
+            n_sq += self.B[i]*wl**2/(wl**2 - self.C[i])
         return np.sqrt(n_sq)
 
     def focal_length(self, lmbda, R1, R2='inf', d=None):
