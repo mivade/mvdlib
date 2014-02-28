@@ -6,10 +6,10 @@ between inverse cm and frequency. Yeah, this mostly just involves
 multiplying by c or 1/c, but sometimes factors of 2*pi are forgotten,
 so this helps prevent that from happening!
 
-"""
+TODO: Additional testing.
+TODO: Convert to using the _x_units dicts for everything
 
-# TODO: Additional testing.
-# TODO: Convert to using the _x_units dicts for everything
+"""
 
 from __future__ import print_function
 from __future__ import division
