@@ -8,7 +8,7 @@ Functions related to angular momentum.
 from __future__ import print_function
 from __future__ import division
 from numpy import sqrt
-from scipy import factorial
+from scipy.misc import factorial
 from sympy.physics.quantum import cg
 
 # Iteration limit for computing Wigner 6j symbols.
