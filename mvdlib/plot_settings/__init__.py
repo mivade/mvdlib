@@ -2,6 +2,13 @@
 Plotting with different styles made easier by allowing for loading of
 seettings from JSON files.
 
+The _decode_list and _decode_dict functions are used to address a bug
+in matplotlib when encountering unicode strings (probably fixed in
+newer versions than what are in Debian wheezy). They come directly
+from `this link`__
+
+__ http://stackoverflow.com/a/6633651
+
 """
 
 from __future__ import print_function
@@ -17,6 +24,32 @@ _styles = {
     "aps": _path + "/aps.json"
     }
 
+def _decode_list(data):
+    rv = []
+    for item in data:
+        if isinstance(item, unicode):
+            item = item.encode('utf-8')
+        elif isinstance(item, list):
+            item = _decode_list(item)
+        elif isinstance(item, dict):
+            item = _decode_dict(item)
+        rv.append(item)
+    return rv
+        
+def _decode_dict(data):
+    rv = {}
+    for key, value in data.iteritems():
+        if isinstance(key, unicode):
+            key = key.encode('utf-8')
+        if isinstance(value, unicode):
+            value = value.encode('utf-8')
+        elif isinstance(value, list):
+            value = _decode_list(value)
+        elif isinstance(value, dict):
+            value = _decode_dict(value)
+        rv[key] = value
+    return rv
+    
 def load_settings(style="default", show_info=True):
     """
     Loads the matplotlib settings from a file. The file does not need
@@ -34,7 +67,7 @@ def load_settings(style="default", show_info=True):
     """
     try:
         with open(_styles[style], 'r') as json_file:
-            rc_params = json.load(json_file)
+            rc_params = json.load(json_file, object_hook=_decode_dict)
     except KeyError:
         print("style must be one of", _styles.keys())
     try:
