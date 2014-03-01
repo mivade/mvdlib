@@ -1,0 +1,7 @@
+{
+    "comment": "APS (PRL, PRA, etc.) settings",
+    "font.family": "serif",
+    "font.serif": "Computer Modern Roman",
+    "text.usetex": true,
+    "figure.figsize": [3.4039, 2.1037]
+}

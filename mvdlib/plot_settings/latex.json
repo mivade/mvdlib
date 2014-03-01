@@ -1,0 +1,7 @@
+{
+    "comment": "Standard settings for using LaTeX.",
+    "font.family": "serif",
+    "font.serif": "Computer Modern Roman",
+    "text.usetex": true,
+    "figure.figsize": [5, 3.09]
+}
