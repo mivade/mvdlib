@@ -78,6 +78,3 @@ def load_settings(style="default", show_info=True):
         pass
     finally:
         plt.rcParams.update(rc_params)
-
-load_settings()
-
