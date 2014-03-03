@@ -1,13 +1,13 @@
 """
-mvdlib.quantum.transitions
+Transitions
 
-Miscellaneous stuff dealing with atomic transitions (e.g., converting
-between inverse cm and frequency. Yeah, this mostly just involves
-multiplying by c or 1/c, but sometimes factors of 2*pi are forgotten,
-so this helps prevent that from happening!
+Conversions between different ways of describing atomic and molecular
+energy levels, e.g., converting between inverse cm and
+frequency. Yeah, this mostly just involves multiplying by c or 1/c,
+but sometimes factors of 2*pi are forgotten, so this helps prevent
+that from happening!
 
 TODO: Additional testing.
-TODO: Convert to using the _x_units dicts for everything
 
 """
 
@@ -42,17 +42,14 @@ def _units_err_msg(measure):
 # Functions
 # ---------
 
-def wavenumber_to_frequency(wavenumber, angular=False):
+def wavenumber_to_frequency(wavenumber, f_units="THz"):
     """
     Convert the wavenumber in inverse cm to frequency.
 
     Parameters
     ----------
     wavenumber : float
-        The wavenumber to convert.
-    angular : bool
-        If True, return an angular frequency instead of an ordinary
-        frequency.
+        The wavenumber in inverse cm to convert.
 
     Returns
     -------
@@ -65,11 +62,12 @@ def wavenumber_to_frequency(wavenumber, angular=False):
     frequency_to_wavenumber
 
     """
-    f = c*wavenumber*1e2
-    if angular:
-        return 2*np.pi*f
-    else:
-        return f
+    f_SI = c*wavenumber*1e2
+    try:
+        f = f_SI/_f_units[f_units]
+    except KeyError:
+        _units_err_msg('f')
+    return f
 
 def wavenumber_to_wavelength(wavenumber, wl_units="nm"):
     """
@@ -102,7 +100,7 @@ def wavenumber_to_wavelength(wavenumber, wl_units="nm"):
     else:
         raise ValueError("wl_units must be nm, um, or angstroms.")
 
-def frequency_to_wavenumber(freq, angular=False):
+def frequency_to_wavenumber(freq, f_units='Hz'):
     """
     Convert the frequency freq into a wavenumber.
 
@@ -110,9 +108,6 @@ def frequency_to_wavenumber(freq, angular=False):
     ----------
     freq : float
         The frequency to convert.
-    angular : bool, optional
-        If True, return an angular frequency instead of an ordinary
-        frequency.
 
     Returns
     -------
@@ -125,13 +120,11 @@ def frequency_to_wavenumber(freq, angular=False):
     wavenumber_to_frequency
 
     """
+    freq *= _f_units[f_units]
     wavenumber = 1e-2*freq/c
-    if angular:
-        return wavenumber/(2*np.pi)
-    else:
-        return wavenumber
+    return wavenumber
 
-def frequency_to_wavelength(freq, wl_units="nm", angular=False):
+def frequency_to_wavelength(freq, f_units="THz", wl_units="nm"):
     """
     Convert the frequency freq to wavelength.
 
@@ -141,9 +134,6 @@ def frequency_to_wavelength(freq, wl_units="nm", angular=False):
         The frequency to convert.
     wl_units : str, optional
         Units the wavelength is given in.    
-    angular : bool, optional
-        If True, return an angular frequency instead of an ordinary
-        frequency.
 
     Returns
     -------
@@ -151,17 +141,16 @@ def frequency_to_wavelength(freq, wl_units="nm", angular=False):
         The calculated wavelength.
 
     """
-    lmbda = c/freq
-    if angular:
-        lmbda *= 2*np.pi
-    if wl_units == "nm":
-        return lmbda/1e-9
-    elif wl_units == "um":
-        return lmbda/1e-6
-    elif wl_units == "angstrom":
-        return lmbda/1e-10
-    else:
-        raise ValueError("wl_units must be nm, um, or angstroms.")
+    try:
+        f_SI = freq*_f_units[f_units]
+    except KeyError:
+        _units_err_msg('f')
+    lmbda_SI = c/freq
+    try:
+        lmbda = lmbda_SI/_wl_units['wl_units']
+    except KeyError:
+        _units_err_msg('wl')
+    return lmbda
 
 def frequency_to_energy(freq, f_units="THz", E_units="eV"):
     """
@@ -293,4 +282,3 @@ if __name__ == "__main__":
     lam = 397.
     print("lambda -> eV:",
           wavelength_to_energy(lam), "eV")
-
