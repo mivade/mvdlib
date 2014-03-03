@@ -1,6 +1,6 @@
 """
 Plotting with different styles made easier by allowing for loading of
-seettings from JSON files.
+settings from JSON files.
 
 The _decode_list and _decode_dict functions are used to address a bug
 in matplotlib when encountering unicode strings (probably fixed in
