@@ -21,7 +21,8 @@ _styles = {
     "default": _path + "/mpl_default.json",
     "test": _path + "/test.json",
     "latex": _path + "/latex.json",
-    "aps": _path + "/aps.json"
+    "aps": _path + "/aps.json",
+    "ipython": _path + "/ipython.json"
     }
 
 def _decode_list(data):
