@@ -35,8 +35,8 @@ class Glass(object):
 
     def sellmeier(self, lmbda):
         """
-        Return the index of refraction at wavelength lmbda given in m
-        (SI units!!!).
+        Return the index of refraction at wavelength lmbda given in
+        meters.
 
         References
         ----------
@@ -76,9 +76,17 @@ class Glass(object):
             B = 1/R1 - 1/R2 + A*d/(n*R1*R2)
             return 1/(A*B)
 
-# The Sellmeier coefficients were obtained from refractiveindex.info
+# Sellmeier coefficients were obtained from refractiveindex.info
 BK7 = Glass([1.03961212, 0.231792344, 1.01046945],
             [6.00069867e-3, 2.00179144e-2, 1.03560653e2])
+SF5 = Glass([1.46141885, 0.247713019, 0.949995832],
+            [0.0111826126, 0.0508594669, 112.041888])
+SF10 = Glass([1.61625977, 0.259229334, 1.07762317],
+             [0.0127534559, 0.0581983954, 116.60768])
+N_SF6HT = Glass([1.77931763, 0.338149866, 2.08734474],
+                [0.0133714182, 0.0617533621, 174.01759])
+N_LAK22 = Glass([1.14229781, 0.535138441, 1.04088385],
+                [0.00585778594, 0.0198546147, 100.834017])
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
