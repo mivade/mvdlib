@@ -6,6 +6,7 @@ mvdlib.optics.glass
 from __future__ import print_function
 from __future__ import division
 import numpy as np
+import scipy.misc
 
 _umsq_to_msq = 1e-12
 _nm_to_micron = 0.001
@@ -49,6 +50,19 @@ class Glass(object):
         for i in range(3):
             n_sq += self.B[i]*wl**2/(wl**2 - self.C[i])
         return np.sqrt(n_sq)
+
+    def chromatic_dispersion(self, lmbda):
+        """
+        Compute the chromatic dispersion dn/dlambda at the wavelength
+        lmbda.
+
+        References
+        ----------
+        * https://en.wikipedia.org/wiki/Dispersion_(optics)
+        * http://refractiveindex.info/
+        
+        """
+        return scipy.misc.derivative(self.sellmeier, lmbda, dx=1e-10)
 
     def focal_length(self, lmbda, R1, R2='inf', d=None):
         """
@@ -99,10 +113,12 @@ if __name__ == "__main__":
         plt.xlabel(r'$\lambda$ [nm]')
         plt.ylabel(r'$n$')
         plt.show()
-    if True:
+    if False:
         wl = np.linspace(800e-9, 850e-9, 100)
         plt.plot(wl/1e-9, BK7.focal_length(wl, 51.5e-3))
         plt.xlabel(r'$\lambda$ [nm]')
         plt.ylabel(r'$f$ [mm]')
         plt.xlim(800, 850)
         plt.show()
+    if True:
+        print(SF10.chromatic_dispersion(800e-9)*1e-6, "1/micron")
