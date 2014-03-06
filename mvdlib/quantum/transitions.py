@@ -145,9 +145,9 @@ def frequency_to_wavelength(freq, f_units="THz", wl_units="nm"):
         f_SI = freq*_f_units[f_units]
     except KeyError:
         _units_err_msg('f')
-    lmbda_SI = c/freq
+    lmbda_SI = c/f_SI
     try:
-        lmbda = lmbda_SI/_wl_units['wl_units']
+        lmbda = lmbda_SI/_wl_units[wl_units]
     except KeyError:
         _units_err_msg('wl')
     return lmbda
