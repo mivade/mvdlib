@@ -21,13 +21,21 @@ from scipy.constants import h, c, physical_constants as consts
 
 # Conversion factors from non-SI to SI
 _wl_units = {'nm': 1e-9, 'um': 1e-6, 'angstrom': 1e-10}
-_f_units = {'Hz': 1.0, 'kHz': 1e3, 'MHz': 1e6, 'THz': 1e12}
+_f_units = {'Hz': 1.0, 'kHz': 1e3, 'MHz': 1e6, 'GHz': 1e9 'THz': 1e12}
 _E_units = {'eV': consts['electron volt'][0], 'J': 1.0}
+
+# TODO: Eventually I'll make this into its own class.
+UnitsError = ValueError
 
 # Error messages
 # --------------
 
 def _units_err_msg(measure):
+    """
+    Return a string with an error message appropriate to whichever
+    units were incorrect.
+    
+    """
     if measure == 'wl':
         units = _wl_units
         name = "Wavelength"
@@ -37,7 +45,7 @@ def _units_err_msg(measure):
     elif measure == 'E':
         units = _E_units
         name = "Energy"
-    print(name, "must be one of:", units.keys())
+    return name + "must be one of: " + str(units.keys())
 
 # Functions
 # ---------
@@ -66,7 +74,7 @@ def wavenumber_to_frequency(wavenumber, f_units="THz"):
     try:
         f = f_SI/_f_units[f_units]
     except KeyError:
-        _units_err_msg('f')
+        raise UnitsError(_units_err_msg('f'))
     return f
 
 def wavenumber_to_wavelength(wavenumber, wl_units="nm"):
@@ -144,12 +152,12 @@ def frequency_to_wavelength(freq, f_units="THz", wl_units="nm"):
     try:
         f_SI = freq*_f_units[f_units]
     except KeyError:
-        _units_err_msg('f')
+        raise UnitsError(_units_err_msg('f'))
     lmbda_SI = c/f_SI
     try:
         lmbda = lmbda_SI/_wl_units[wl_units]
     except KeyError:
-        _units_err_msg('wl')
+        raise UnitsError(_units_err_msg('wl'))
     return lmbda
 
 def frequency_to_energy(freq, f_units="THz", E_units="eV"):
@@ -174,12 +182,12 @@ def frequency_to_energy(freq, f_units="THz", E_units="eV"):
     try:
         f_SI = freq*_f_units[f_units]
     except KeyError:
-        _units_err_msg('f')
+        raise UnitsError(_units_err_msg('f'))
     E_SI = h*f_SI
     try:
         E = E_SI/E_units
     except KeyError:
-        _units_err_msg('E')
+        raise UnitsError(_units_err_msg('E'))
     return E
 
 def wavelength_to_frequency(wl, wl_units="nm", f_units="THz"):
@@ -204,12 +212,12 @@ def wavelength_to_frequency(wl, wl_units="nm", f_units="THz"):
     try:
         wl_SI = wl*_wl_units[wl_units]
     except KeyError:
-        _units_err_msg('wl')
+        raise UnitsError(_units_err_msg('wl'))
     f_SI = c/wl_SI
     try:
         f = f_SI/_f_units[f_units]
     except KeyError:
-        _units_err_msg('f')
+        raise UnitsError(_units_err_msg('f'))
     return f
 
 
@@ -235,11 +243,11 @@ def wavelength_to_energy(wl, wl_units="nm", E_units="eV"):
     try:
         E_SI = h*c/(wl*_wl_units[wl_units])
     except KeyError:
-        _units_err_msg('wl')
+        raise UnitsError(_units_err_msg('wl'))
     try:
         E = E_SI/_E_units[E_units]
     except KeyError:
-        _units_err_msg('E')
+        raise UnitsError(_units_err_msg('E'))
     return E
 
 def energy_to_frequency(E, E_units="eV", f_units="THz"):
@@ -264,21 +272,24 @@ def energy_to_frequency(E, E_units="eV", f_units="THz"):
     try:
         E_SI = E*_E_units[E_units]
     except KeyError:
-        _units_err_msg('E')
+        raise UnitsError(_units_err_msg('E'))
     f_SI = E_SI/h
     try:
         f = f_SI/_f_units[f_units]
-    except KerError:
-        _units_err_msg('f')
+    except KeyError:
+        raise UnitsError(_units_err_msg('f'))
     return f
 
 if __name__ == "__main__":
     wavenum = 25191.51 # wavenumber in 1/cm for Ca+ 397 nm transition
-    print("1/lambda -> lambda:",
-          wavenumber_to_wavelength(wavenum), "nm")
-    print("1/lambda -> f:",
-          wavenumber_to_frequency(wavenum)/1e12, "THz")
+    wavelength = wavenumber_to_wavelength(wavenum, "nm")
+    freq = wavenumber_to_frequency(wavenum, "THz")
+    energy = wavelength_to_energy(wavelength, E_units="eV")
 
-    lam = 397.
-    print("lambda -> eV:",
-          wavelength_to_energy(lam), "eV")
+    print("1/lambda -> lambda:", wavelength, "nm")
+    print("1/lambda -> f:", freq, "THz")
+    print("lambda -> eV:", energy, "eV")
+
+    freq = energy_to_frequency(energy, f_units="GHz", E_units="eV")
+    
+    print("eV -> MHz:", freq, "MHz")
