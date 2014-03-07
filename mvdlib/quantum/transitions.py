@@ -20,8 +20,8 @@ from scipy.constants import h, c, physical_constants as consts
 # -----
 
 # Conversion factors from non-SI to SI
-_wl_units = {'nm': 1e-9, 'um': 1e-6, 'angstrom': 1e-10}
-_f_units = {'Hz': 1.0, 'kHz': 1e3, 'MHz': 1e6, 'GHz': 1e9 'THz': 1e12}
+_wl_units = {'angstrom': 1e-10, 'nm': 1e-9, 'um': 1e-6, 'm': 1.0}
+_f_units = {'Hz': 1.0, 'kHz': 1e3, 'MHz': 1e6, 'GHz': 1e9, 'THz': 1e12}
 _E_units = {'eV': consts['electron volt'][0], 'J': 1.0}
 
 # TODO: Eventually I'll make this into its own class.
