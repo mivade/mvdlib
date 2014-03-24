@@ -22,7 +22,8 @@ _styles = {
     "test": _path + "/test.json",
     "latex": _path + "/latex.json",
     "aps": _path + "/aps.json",
-    "ipython": _path + "/ipython.json"
+    "ipython": _path + "/ipython.json",
+    "presentation": _path + "/presentation.json"
     }
 
 def _decode_list(data):
