@@ -1,0 +1,9 @@
+{
+    "comment": "LaTeX poster settings with kurier font.",
+    "font.size": 14,
+    "text.usetex": true,
+    "text.latex.preamble": ["\\usepackage[math]{kurier}"],
+    "xtick.major.pad": 8,
+    "ytick.major.pad": 8,
+    "figure.figsize": [5, 3.09]
+}
