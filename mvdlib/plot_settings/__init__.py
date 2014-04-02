@@ -24,7 +24,8 @@ _styles = {
     "aps": _path + "/aps.json",
     "ipython": _path + "/ipython.json",
     "presentation": _path + "/presentation.json",
-    "poster": _path + "/poster.json"
+    "poster": _path + "/poster.json",
+    "web": _path + "/web.json"
     }
 
 def _decode_list(data):

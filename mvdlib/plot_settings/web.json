@@ -1,0 +1,11 @@
+{
+    "comment": "Plot settings for graphs meant to be put on the web.",
+    "font.family": "sans-serif",
+    "font.sans-serif": "Bitstream Vera Sans",
+    "font.size": 14,
+    "text.usetex": false,
+    "mathtext.fontset": "stixsans",
+    "xtick.major.pad": 8,
+    "ytick.major.pad": 8,
+    "figure.figsize": [10, 6.18]
+}
