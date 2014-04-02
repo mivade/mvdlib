@@ -185,7 +185,7 @@ def frequency_to_energy(freq, f_units="THz", E_units="eV"):
         raise UnitsError(_units_err_msg('f'))
     E_SI = h*f_SI
     try:
-        E = E_SI/E_units
+        E = E_SI/_E_units[E_units]
     except KeyError:
         raise UnitsError(_units_err_msg('E'))
     return E
