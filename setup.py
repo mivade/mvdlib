@@ -1,10 +1,10 @@
-from setuptools import setup, find_packages
+from distutils.core import setup
 from mvdlib import __version__ as version
 
 setup(
     name="mvdlib",
     version=version,
-    packages=find_packages(),
+    packages=['mvdlib', 'mvdlib.optics', 'mvdlib.quantum'],
     package_data={
         '': ['*.json'],
     },
@@ -14,7 +14,7 @@ setup(
     license="GPL 3.0",
     keywords="personal library",
     url="https://github.com/mivade/mvdlib",
-    install_requires=(
+    requires=(
         "numpy",
         "scipy",
         "matplotlib"

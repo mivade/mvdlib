@@ -1,5 +1,4 @@
-"""
-mvdlib.quantum.angular_momentum
+"""mvdlib.quantum.angular_momentum
 
 Functions related to angular momentum.
 
