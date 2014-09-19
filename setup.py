@@ -4,7 +4,13 @@ from mvdlib import __version__ as version
 setup(
     name="mvdlib",
     version=version,
-    packages=['mvdlib', 'mvdlib.optics', 'mvdlib.quantum'],
+    packages=(
+        'mvdlib',
+        'mvdlib.analysis',
+        'mvdlib.optics',
+        'mvdlib.plot_settings'
+        'mvdlib.quantum',
+    ),
     package_data={
         '': ['*.json'],
     },

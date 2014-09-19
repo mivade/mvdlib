@@ -19,7 +19,7 @@ class RabiFlop(object):
         -----------------
         
         delimiter : str
-            Column delimiter. Default: ';'
+            Column delimiter. Default: ','
         percent : bool
             When True, populations are assumed to be 0-100 instead of
             0-1.0. Default: False
@@ -27,7 +27,7 @@ class RabiFlop(object):
             If False, only load time and population columns.
 
         """
-        delimiter = kwargs.get('delimiter', ';')
+        delimiter = kwargs.get('delimiter', ',')
         data = np.loadtxt(datafile, delimiter=delimiter)
         self.t = data[:,0]
         self.P = data[:,1]

@@ -171,6 +171,7 @@ class Combiner(object):
         )
         with open(readme_fname, 'w') as out:
             out.writelines(readme)
+        return outfile
 
 if __name__ == "__main__":
     data = Combiner('/home/mvd/tmp/20140918', 'rabi_', skiprows=1)
