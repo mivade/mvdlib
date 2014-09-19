@@ -12,7 +12,7 @@ TODO:
 import os.path
 import numpy as np
 import matplotlib.pyplot as plt
-from types import NoneType
+from types import NoneType, StringTypes
 
 class CombinationError(Exception):
     pass
@@ -44,6 +44,8 @@ class Combiner(object):
         # Get and check arguments
         self.datadir = datadir
         assert isinstance(self.datadir, (str, unicode))
+        if self.datadir == '.':
+            self.datadir = os.path.abspath(os.path.curdir)
         self.prefix = prefix
         assert isinstance(self.prefix, (str, unicode))
         self.zpad = kwargs.get('zpad', 4)
@@ -135,6 +137,9 @@ class Combiner(object):
             raise CombinationError("You must combine data first!")
         
         # Determine output file name
+        assert isinstance(location, StringTypes)
+        if location == '.':
+            location = os.path.abspath(os.path.curdir)
         basename = '{pre}_combined_{i:0{zpad}d}.csv'
         i = 1
         while True:

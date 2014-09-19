@@ -16,7 +16,7 @@ import json
 import matplotlib.pyplot as plt
 
 _path = os.path.dirname(__file__)
-_styles = {
+styles = {
     "default": _path + "/mpl_default.json",
     "test": _path + "/test.json",
     "latex": _path + "/latex.json",
@@ -69,10 +69,10 @@ def load_settings(style="default", show_info=True):
 
     """
     try:
-        with open(_styles[style], 'r') as json_file:
+        with open(styles[style], 'r') as json_file:
             rc_params = json.load(json_file, object_hook=_decode_dict)
     except KeyError:
-        print("style must be one of", _styles.keys())
+        print("style must be one of", styles.keys())
     try:
         comment = rc_params.pop("comment")
         if show_info:

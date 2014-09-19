@@ -8,7 +8,7 @@ setup(
         'mvdlib',
         'mvdlib.analysis',
         'mvdlib.optics',
-        'mvdlib.plot_settings'
+        'mvdlib.plot_settings',
         'mvdlib.quantum',
     ),
     package_data={
