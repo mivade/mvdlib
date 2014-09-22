@@ -108,8 +108,14 @@ class Plotter(object):
 
         Keyword arguments
         -----------------
+        xlabel : str
+            Label for the horizontal axis.
+        ylabel : str
+            Label for the vertical axis.
         linestyle : str
             Matplotlib linestyle specification. Default: '-'
+        linewidth : float
+            Line width. Default: 1.5
 
         """
         # Check that there's actually something to plot
@@ -119,8 +125,14 @@ class Plotter(object):
         # Check arguments
         assert isinstance(style, StringTypes)
         assert style in plot_settings.styles
+        xlabel = kwargs.get('xlabel', '')
+        assert isinstance(xlabel, StringTypes)
+        ylabel = kwargs.get('ylabel', '')
+        assert isinstance(ylabel, StringTypes)
         linestyle = kwargs.get('linestyle', '-')
         assert isinstance(linestyle, StringTypes)
+        linewidth = kwargs.get('linewidth', 1.5)
+        assert isinstance(linewidth, (int, float))
 
         # Plotting
         plot_settings.load_settings(style)
@@ -131,8 +143,12 @@ class Plotter(object):
                 self.x[i], self.y[i],
                 label=self.legend[i],
                 marker=_markers.next(),
-                linestyle=linestyle
+                linestyle=linestyle,
+                linewidth=linewidth
             )
+        plt.legend()
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
         plt.hold(False)
         plt.savefig(
             os.path.join(self.datadir, 'last.svg'), bbox_inches='tight'
