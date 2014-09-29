@@ -5,4 +5,4 @@ import fit_functions
 import misc
 import quantum
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
