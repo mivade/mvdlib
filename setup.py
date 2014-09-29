@@ -9,10 +9,11 @@ setup(
         'mvdlib.analysis',
         'mvdlib.optics',
         'mvdlib.plot_settings',
+        'mvdlib.plotutils',
         'mvdlib.quantum',
     ),
     package_data={
-        '': ['*.json'],
+        '': ['styles/*.json'],
     },
     author="Michael V. DePalatis",
     author_email="depalatis@phys.au.dk",
